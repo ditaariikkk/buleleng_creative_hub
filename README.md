@@ -1,59 +1,113 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+{{-- Sesuaikan path ini jika logo Anda ada di 'public/img/Logo(1).png' --}}
+<img src="public/vendor/adminlte/dist/img/Logo.png" alt="Buleleng Creative Hub Logo" width="150">
 </p>
 
-## About Laravel
+<h1 align="center">Buleleng Creative Hub</h1>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+Platform Digital Terpadu untuk ekosistem ekonomi kreatif di Buleleng.
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<p align="center">
+<a href="##🚀-tentang-proyek-ini">Tentang Proyek</a> •
+<a href="##✨-fitur-fitur">Fitur</a> •
+<a href="##🛠️-teknologi-yang-digunakan">Teknologi</a> •
+<a href="##🖥️-instalasi">Instalasi</a>
+</p>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tentan Proyek ini
 
-## Learning Laravel
+Buleleng Creative Hub (BCH) adalah sebuah aplikasi web yang dirancang untuk menjadi pusat digital bagi para pelaku ekonomi kreatif di Buleleng. Tujuan utamanya adalah untuk menghubungkan talenta kreatif (Peserta/User) dengan sumber daya yang mereka butuhkan untuk berkembang.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Aplikasi ini memiliki dua peran utama:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   Admin: Mengelola seluruh data master platform (Mentor, Event, User, Produk, dll).
 
-## Laravel Sponsors
+-   User (Peserta): Melengkapi profil, mendapatkan rekomendasi, mendaftar mentor, dan mengakses konten.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## ✨ Fitur-Fitur
 
-### Premium Partners
+Platform ini dibagi menjadi tiga bagian utama: Landing Page Publik, Panel Admin, dan Portal Pengguna.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+1. Landing Page (Publik)
 
-## Contributing
+Desain modern terinspirasi "Unbrew" (menggunakan Tailwind CSS).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Menampilkan hero section, carousel produk unggulan, daftar fitur, statistik real-time (jumlah mentor, user, dll.), galeri mentor, dan galeri venue.
 
-## Code of Conduct
+Tombol Login dan Register yang jelas.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2. Panel Admin (Admin Dashboard)
 
-## Security Vulnerabilities
+Dashboard Statistik: Menampilkan ringkasan jumlah peserta, mentor, event, dan media pembelajaran. Termasuk tabel peserta terbaru dan status mentor mereka.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Manajemen Multi-Peran: Menggunakan Gate Laravel (is_admin, is_user) untuk menampilkan sidebar dinamis yang aman untuk di-cache.
 
-## License
+CRUD AJAX: Sebagian besar manajemen data menggunakan modal AJAX (tanpa reload halaman) untuk:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Manajemen Admin: Tambah/Edit/Hapus admin (dengan toggle lihat password).
+
+Manajemen Mentor: CRUD data mentor, keahlian (sub sektor), dan layanan (user needs).
+
+Manajemen Event: Modal multi-langkah (Detail Acara -> Pilih Sub Sektor) dengan logika dropdown "Venue Lainnya" yang dinamis.
+
+Manajemen LMS: CRUD media pembelajaran dengan pilihan sumber (URL eksternal atau Upload File).
+
+Manajemen Produk: CRUD etalase produk dengan upload foto.
+
+Manajemen Venue: CRUD data venue (lokasi) dengan upload foto.
+
+Manajemen Berita: CRUD untuk berita/artikel.
+
+Manajemen Peserta: Melihat daftar semua peserta (role "user") dan detail profil mereka (termasuk No. HP dan mentor).
+
+3. Portal Pengguna (User Dashboard)
+
+Alur Registrasi & Profiling: Pengguna baru mendaftar (halaman registrasi kustom) dan langsung diarahkan ke modal 2 langkah untuk melengkapi profil (bio, foto, portofolio) dan memilih minat (Sub Sektor & Kebutuhan Layanan).
+
+Dashboard Dinamis: Tampilan dashboard yang dipersonalisasi:
+
+Menampilkan carousel Produk Etalase dan daftar Berita Terbaru.
+
+Menampilkan grid card Event Mendatang dan Media Pembelajaran (LMS) yang difilter berdasarkan sub-sektor yang diminati pengguna.
+
+Sistem Rekomendasi Mentor:
+
+Menampilkan daftar mentor yang relevan berdasarkan sub-sektor pengguna.
+
+Pengguna dapat Memilih Mentor (dengan konfirmasi SweetAlert).
+
+Jika sudah punya mentor, menampilkan detail mentor saat ini dan tombol Ganti Mentor (dengan konfirmasi SweetAlert).
+
+Halaman Eksplorasi (User-Facing):
+
+Halaman user.products.index, user.venues.index, user.events.index, user.lms.index, user.news.index dengan tampilan grid card yang rapi.
+
+Halaman user.lms.index dan user.events.index memiliki filter chips (badges) untuk memfilter konten berdasarkan Tipe (LMS) atau Status (Event).
+
+Detail Produk dan Venue ditampilkan dalam Modal AJAX untuk experience yang cepat.
+
+Halaman Profil: Tampilan detail profil pengguna dengan modal edit 3-tab (Akun, Profil, Minat) untuk memperbarui data via AJAX.
+
+## 🛠️ Teknologi yang Digunakan
+
+-   Database: MySQL
+
+-   Template Admin/Dashboard: AdminLTE v3 (diimplementasikan melalui paket jeroennoten/laravel-adminlte)
+
+-   Frontend (Dashboard): Bootstrap 4 (dari AdminLTE), jQuery, AJAX (untuk semua operasi CRUD modal)
+
+-   Frontend (Landing Page): Tailwind CSS (via CDN)
+
+-   Library Tambahan:
+
+    1. SweetAlert2: (Versi 8, via CDN) untuk notifikasi modal yang interaktif.
+
+    2. Chart.js: (Opsional, untuk dashboard admin)
+
+    3. Font Awesome 5/6: (via AdminLTE) untuk ikonografi.
+
+    4. Autentikasi: Laravel UI (Bootstrap) dengan view yang dikustomisasi agar sesuai layout AdminLTE.
+
+    5. Otorisasi: Laravel Gates (is_admin, is_user) untuk memisahkan logika peran di backend dan sidebar.
