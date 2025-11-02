@@ -1,59 +1,11 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<p align="center"><img src="public/vendor/adminlte/dist/img/Logo.png" alt="Buleleng Creative Hub Logo" width="150"></p><h1 align="center">Buleleng Creative Hub (BCH)</h1><p align="center">Platform digital terpadu untuk ekosistem ekonomi kreatif di Buleleng.</p><p align="center"><a href="#tentang-proyek-ini">Tentang Proyek</a> •<a href="#fitur-fitur">Fitur</a> •<a href="#teknologi-yang-digunakan">Teknologi</a> •<a href="#instalasi">Instalasi</a></p>🚀 Tentang Proyek IniBuleleng Creative Hub (BCH) adalah sebuah aplikasi web yang dirancang untuk menjadi pusat digital bagi para pelaku ekonomi kreatif di Buleleng. Tujuan utamanya adalah untuk menghubungkan talenta kreatif (Peserta/User) dengan sumber daya yang mereka butuhkan untuk berkembang.Platform ini menyediakan sistem rekomendasi cerdas yang, berdasarkan profil dan kebutuhan pengguna, akan menyarankan mentor, acara (event), dan materi pembelajaran (LMS) yang paling relevan.Aplikasi ini memiliki dua peran utama:Admin: Mengelola seluruh data master platform (Mentor, Event, User, Produk, dll).User (Peserta): Melengkapi profil, mendapatkan rekomendasi, mendaftar mentor, dan mengakses konten.✨ Fitur-FiturPlatform ini dibagi menjadi dua bagian utama: Panel Admin dan Dashboard Pengguna.1. Panel Admin (Admin Dashboard)Panel manajemen terpusat untuk mengelola seluruh ekosistem aplikasi:Dashboard Statistik: Menampilkan ringkasan jumlah peserta, mentor, event, dan media pembelajaran.Manajemen Peserta: Melihat daftar semua peserta (role "user") dan status mentor mereka.Manajemen Admin: Menambah, mengedit, dan menghapus akun admin lainnya.Manajemen Mentor: CRUD lengkap untuk data mentor, termasuk bio, keahlian, dan layanan yang ditawarkan.Manajemen Event: CRUD lengkap untuk acara (offline/online) dengan sistem modal multi-langkah, termasuk pemilihan sub-sektor.Manajemen LMS: CRUD lengkap untuk media pembelajaran (Artikel, Buku, Video) dengan opsi upload file atau tautan URL.Manajemen Etalase (Produk): CRUD lengkap untuk produk-produk UMKM, termasuk upload foto.Manajemen Venue: CRUD lengkap untuk data venue (lokasi acara).Manajemen Berita (News): CRUD lengkap untuk artikel berita.2. Portal Pengguna (User Dashboard)Alur Registrasi & Profiling: Pengguna baru mendaftar dan langsung diarahkan ke modal 2 langkah untuk melengkapi profil (bio, foto, portofolio) dan memilih minat (Sub Sektor & Kebutuhan Layanan).Dashboard Dinamis: Tampilan dashboard yang dipersonalisasi berdasarkan minat pengguna.Sistem Rekomendasi Mentor: Menampilkan daftar mentor yang relevan berdasarkan sub-sektor.Sistem Pendaftaran Mentor: Pengguna dapat memilih satu mentor ("Pilih Mentor") dan menggantinya ("Ganti Mentor").Konten Terfilter: Menampilkan carousel Produk, daftar Berita, grid card Event, dan grid card LMS yang sudah difilter sesuai sub-sektor pengguna.Halaman Eksplorasi: Halaman terpisah (Index) untuk Produk, Event, LMS, Berita, dan Venue, masing-masing dengan layout grid card dan modal detail AJAX atau halaman detail terpisah.Halaman Profil: Tampilan detail profil pengguna dengan modal edit 3-tab (Akun, Profil, Minat) untuk memperbarui data.🛠️ Teknologi yang DigunakanProyek ini dibangun menggunakan tumpukan teknologi modern yang berfokus pada PHP dan Laravel.Framework Backend: Laravel 12.x (PHP 8.3)Framework Frontend: Bootstrap 4 (disediakan oleh AdminLTE)Template Admin: AdminLTE v3 (diimplementasikan melalui paket jeroennoten/laravel-adminlte)Database: MySQLLogika Frontend: JavaScript (jQuery) dengan AJAX untuk semua operasi CRUD modal.Library Tambahan:SweetAlert2: Untuk notifikasi modal yang interaktif.Chart.js: (Awalnya digunakan) untuk visualisasi data di dashboard admin.Font Awesome: Untuk ikonografi di seluruh aplikasi.Landing Page: Dibuat kustom menggunakan Tailwind CSS.🖥️ Instalasi (Development)Berikut adalah panduan singkat untuk menjalankan proyek ini di lingkungan lokal.Clone repositori:git clone [https://github.com/NAMA_ANDA/NAMA_REPO_ANDA.git](https://github.com/NAMA_ANDA/NAMA_REPO_ANDA.git)
+cd NAMA_REPO_ANDA
+Instal dependensi Backend (PHP):composer install
+Instal dependensi Frontend (Node.js):npm install
+npm run dev
+Setup Environment:Salin file .env.example menjadi .env.copy .env.example .env
+Buat database MySQL baru untuk proyek ini.Atur koneksi database (DB_DATABASE, DB_USERNAME, DB_PASSWORD) di file .env.Pastikan SESSION_DRIVER dan CACHE_DRIVER diatur ke file (rekomendasi awal).Jalankan Perintah Laravel:php artisan key:generate
+php artisan migrate --seed  # Jalankan migrasi & seeder (jika ada)
+php artisan storage:link    # Buat symlink untuk file foto
+Jalankan Server:php artisan serve
+Akun Default (jika ada):Admin: admin@admin.com | passwordUser: user@user.com | password
