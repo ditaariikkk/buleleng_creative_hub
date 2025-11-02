@@ -43,21 +43,42 @@ Tombol Login dan Register yang jelas.
 
 -   Manajemen Multi-Peran: Menggunakan Gate Laravel (is_admin, is_user) untuk menampilkan sidebar dinamis yang aman untuk di-cache.
 
+-   # CRUD AJAX: Sebagian besar manajemen data menggunakan modal AJAX (tanpa reload halaman) untuk:
+-   Dashboard Statistik: Menampilkan ringkasan jumlah peserta, mentor, event, dan media pembelajaran. Termasuk tabel peserta terbaru dan status mentor mereka.
+
+-   Manajemen Multi-Peran: Menggunakan Gate Laravel (is_admin, is_user) untuk menampilkan sidebar dinamis yang aman untuk di-cache.
+
 -   CRUD AJAX: Sebagian besar manajemen data menggunakan modal AJAX (tanpa reload halaman) untuk:
 
-    1. Manajemen Admin: Tambah/Edit/Hapus admin (dengan toggle lihat password).
+    > > > > > > > 5a420e4470a7bce396ed9bf3c4bfc0d2cdf2458f
 
-    2. Manajemen Mentor: CRUD data mentor, keahlian (sub sektor), dan layanan (user needs).
+        1. Manajemen Admin: Tambah/Edit/Hapus admin (dengan toggle lihat password).
 
-    3. Manajemen Event: Modal multi-langkah (Detail Acara -> Pilih Sub Sektor) dengan logika dropdown "Venue Lainnya" yang dinamis.
+        2. Manajemen Mentor: CRUD data mentor, keahlian (sub sektor), dan layanan (user needs).
 
-    4. Manajemen LMS: CRUD media pembelajaran dengan pilihan sumber (URL eksternal atau Upload File).
+        3. Manajemen Event: Modal multi-langkah (Detail Acara -> Pilih Sub Sektor) dengan logika dropdown "Venue Lainnya" yang dinamis.
 
-    5. Manajemen Produk: CRUD etalase produk dengan upload foto.
+        4. Manajemen LMS: CRUD media pembelajaran dengan pilihan sumber (URL eksternal atau Upload File).
 
-    6. Manajemen Venue: CRUD data venue (lokasi) dengan upload foto.
+        5. Manajemen Produk: CRUD etalase produk dengan upload foto.
 
-    7. Manajemen Berita: CRUD untuk berita/artikel.
+        6. Manajemen Venue: CRUD data venue (lokasi) dengan upload foto.
+
+        7. Manajemen Berita: CRUD untuk berita/artikel.
+
+-   Manajemen Peserta: Melihat daftar semua peserta (role "user") dan detail profil mereka (termasuk No. HP dan mentor).
+
+**3. Portal Pengguna (User Dashboard)**
+
+-   Alur Registrasi & Profiling: Pengguna baru mendaftar (halaman registrasi kustom) dan langsung diarahkan ke modal 2 langkah untuk melengkapi profil (bio, foto, portofolio) dan memilih minat (Sub Sektor & Kebutuhan Layanan).
+
+-   Dashboard Dinamis: Tampilan dashboard yang dipersonalisasi:
+
+-   Menampilkan carousel Produk Etalase dan daftar Berita Terbaru.
+
+-   Menampilkan grid card Event Mendatang dan Media Pembelajaran (LMS) yang difilter berdasarkan sub-sektor yang diminati pengguna.
+
+-   Sistem Rekomendasi Mentor:
 
 -   Manajemen Peserta: Melihat daftar semua peserta (role "user") dan detail profil mereka (termasuk No. HP dan mentor).
 
@@ -87,7 +108,17 @@ Tombol Login dan Register yang jelas.
 
 -   Detail Produk dan Venue ditampilkan dalam Modal AJAX untuk experience yang cepat.
 
+-   # Halaman Profil: Tampilan detail profil pengguna dengan modal edit 3-tab (Akun, Profil, Minat) untuk memperbarui data via AJAX.
+-   Halaman Eksplorasi (User-Facing):
+
+-   Halaman user.products.index, user.venues.index, user.events.index, user.lms.index, user.news.index dengan tampilan grid card yang rapi.
+
+-   Halaman user.lms.index dan user.events.index memiliki filter chips (badges) untuk memfilter konten berdasarkan Tipe (LMS) atau Status (Event).
+
+-   Detail Produk dan Venue ditampilkan dalam Modal AJAX untuk experience yang cepat.
+
 -   Halaman Profil: Tampilan detail profil pengguna dengan modal edit 3-tab (Akun, Profil, Minat) untuk memperbarui data via AJAX.
+    > > > > > > > 5a420e4470a7bce396ed9bf3c4bfc0d2cdf2458f
 
 ## 🛠️ Teknologi yang Digunakan
 
