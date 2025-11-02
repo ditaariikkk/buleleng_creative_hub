@@ -1,11 +1,112 @@
-<p align="center"><img src="public/vendor/adminlte/dist/img/Logo.png" alt="Buleleng Creative Hub Logo" width="150"></p><h1 align="center">Buleleng Creative Hub (BCH)</h1><p align="center">Platform digital terpadu untuk ekosistem ekonomi kreatif di Buleleng.</p><p align="center"><a href="#tentang-proyek-ini">Tentang Proyek</a> •<a href="#fitur-fitur">Fitur</a> •<a href="#teknologi-yang-digunakan">Teknologi</a> •<a href="#instalasi">Instalasi</a></p>🚀 Tentang Proyek IniBuleleng Creative Hub (BCH) adalah sebuah aplikasi web yang dirancang untuk menjadi pusat digital bagi para pelaku ekonomi kreatif di Buleleng. Tujuan utamanya adalah untuk menghubungkan talenta kreatif (Peserta/User) dengan sumber daya yang mereka butuhkan untuk berkembang.Platform ini menyediakan sistem rekomendasi cerdas yang, berdasarkan profil dan kebutuhan pengguna, akan menyarankan mentor, acara (event), dan materi pembelajaran (LMS) yang paling relevan.Aplikasi ini memiliki dua peran utama:Admin: Mengelola seluruh data master platform (Mentor, Event, User, Produk, dll).User (Peserta): Melengkapi profil, mendapatkan rekomendasi, mendaftar mentor, dan mengakses konten.✨ Fitur-FiturPlatform ini dibagi menjadi dua bagian utama: Panel Admin dan Dashboard Pengguna.1. Panel Admin (Admin Dashboard)Panel manajemen terpusat untuk mengelola seluruh ekosistem aplikasi:Dashboard Statistik: Menampilkan ringkasan jumlah peserta, mentor, event, dan media pembelajaran.Manajemen Peserta: Melihat daftar semua peserta (role "user") dan status mentor mereka.Manajemen Admin: Menambah, mengedit, dan menghapus akun admin lainnya.Manajemen Mentor: CRUD lengkap untuk data mentor, termasuk bio, keahlian, dan layanan yang ditawarkan.Manajemen Event: CRUD lengkap untuk acara (offline/online) dengan sistem modal multi-langkah, termasuk pemilihan sub-sektor.Manajemen LMS: CRUD lengkap untuk media pembelajaran (Artikel, Buku, Video) dengan opsi upload file atau tautan URL.Manajemen Etalase (Produk): CRUD lengkap untuk produk-produk UMKM, termasuk upload foto.Manajemen Venue: CRUD lengkap untuk data venue (lokasi acara).Manajemen Berita (News): CRUD lengkap untuk artikel berita.2. Portal Pengguna (User Dashboard)Alur Registrasi & Profiling: Pengguna baru mendaftar dan langsung diarahkan ke modal 2 langkah untuk melengkapi profil (bio, foto, portofolio) dan memilih minat (Sub Sektor & Kebutuhan Layanan).Dashboard Dinamis: Tampilan dashboard yang dipersonalisasi berdasarkan minat pengguna.Sistem Rekomendasi Mentor: Menampilkan daftar mentor yang relevan berdasarkan sub-sektor.Sistem Pendaftaran Mentor: Pengguna dapat memilih satu mentor ("Pilih Mentor") dan menggantinya ("Ganti Mentor").Konten Terfilter: Menampilkan carousel Produk, daftar Berita, grid card Event, dan grid card LMS yang sudah difilter sesuai sub-sektor pengguna.Halaman Eksplorasi: Halaman terpisah (Index) untuk Produk, Event, LMS, Berita, dan Venue, masing-masing dengan layout grid card dan modal detail AJAX atau halaman detail terpisah.Halaman Profil: Tampilan detail profil pengguna dengan modal edit 3-tab (Akun, Profil, Minat) untuk memperbarui data.🛠️ Teknologi yang DigunakanProyek ini dibangun menggunakan tumpukan teknologi modern yang berfokus pada PHP dan Laravel.Framework Backend: Laravel 12.x (PHP 8.3)Framework Frontend: Bootstrap 4 (disediakan oleh AdminLTE)Template Admin: AdminLTE v3 (diimplementasikan melalui paket jeroennoten/laravel-adminlte)Database: MySQLLogika Frontend: JavaScript (jQuery) dengan AJAX untuk semua operasi CRUD modal.Library Tambahan:SweetAlert2: Untuk notifikasi modal yang interaktif.Chart.js: (Awalnya digunakan) untuk visualisasi data di dashboard admin.Font Awesome: Untuk ikonografi di seluruh aplikasi.Landing Page: Dibuat kustom menggunakan Tailwind CSS.🖥️ Instalasi (Development)Berikut adalah panduan singkat untuk menjalankan proyek ini di lingkungan lokal.Clone repositori:git clone [https://github.com/NAMA_ANDA/NAMA_REPO_ANDA.git](https://github.com/NAMA_ANDA/NAMA_REPO_ANDA.git)
-cd NAMA_REPO_ANDA
-Instal dependensi Backend (PHP):composer install
-Instal dependensi Frontend (Node.js):npm install
-npm run dev
-Setup Environment:Salin file .env.example menjadi .env.copy .env.example .env
-Buat database MySQL baru untuk proyek ini.Atur koneksi database (DB_DATABASE, DB_USERNAME, DB_PASSWORD) di file .env.Pastikan SESSION_DRIVER dan CACHE_DRIVER diatur ke file (rekomendasi awal).Jalankan Perintah Laravel:php artisan key:generate
-php artisan migrate --seed  # Jalankan migrasi & seeder (jika ada)
-php artisan storage:link    # Buat symlink untuk file foto
-Jalankan Server:php artisan serve
-Akun Default (jika ada):Admin: admin@admin.com | passwordUser: user@user.com | password
+<p align="center">
+<img src="public/vendor/adminlte/dist/img/Logo(1).png" alt="Buleleng Creative Hub Logo" width="150">
+</p>
+
+<h1 align="center">Buleleng Creative Hub</h1>
+
+<p align="center">
+Platform Digital Terpadu untuk ekosistem ekonomi kreatif di Buleleng.
+</p>
+
+<p align="center">
+<a href="##🚀-tentang-proyek-ini">Tentang Proyek</a> •
+<a href="##✨-fitur-fitur">Fitur</a> •
+<a href="##🛠️-teknologi-yang-digunakan">Teknologi</a> •
+<a href="##🖥️-instalasi">Instalasi</a>
+</p>
+
+## Tentan Proyek ini
+
+Buleleng Creative Hub (BCH) adalah sebuah aplikasi web yang dirancang untuk menjadi pusat digital bagi para pelaku ekonomi kreatif di Buleleng. Tujuan utamanya adalah untuk menghubungkan talenta kreatif (Peserta/User) dengan sumber daya yang mereka butuhkan untuk berkembang.
+
+Aplikasi ini memiliki dua peran utama:
+
+-   Admin: Mengelola seluruh data master platform (Mentor, Event, User, Produk, dll).
+
+-   User (Peserta): Melengkapi profil, mendapatkan rekomendasi, mendaftar mentor, dan mengakses konten.
+
+## ✨ Fitur-Fitur
+
+Platform ini dibagi menjadi tiga bagian utama: Landing Page Publik, Panel Admin, dan Portal Pengguna.
+
+**1. Landing Page (Publik)**
+
+Desain modern terinspirasi "Unbrew" (menggunakan Tailwind CSS).
+
+Menampilkan hero section, carousel produk unggulan, daftar fitur, statistik real-time (jumlah mentor, user, dll.), galeri mentor, dan galeri venue.
+
+Tombol Login dan Register yang jelas.
+
+**2. Panel Admin (Admin Dashboard)**
+
+- Dashboard Statistik: Menampilkan ringkasan jumlah peserta, mentor, event, dan media pembelajaran. Termasuk tabel peserta terbaru dan status mentor mereka.
+
+- Manajemen Multi-Peran: Menggunakan Gate Laravel (is_admin, is_user) untuk menampilkan sidebar dinamis yang aman untuk di-cache.
+
+- CRUD AJAX: Sebagian besar manajemen data menggunakan modal AJAX (tanpa reload halaman) untuk:
+
+    1. Manajemen Admin: Tambah/Edit/Hapus admin (dengan toggle lihat password).
+
+    2. Manajemen Mentor: CRUD data mentor, keahlian (sub sektor), dan layanan (user needs).
+
+    3. Manajemen Event: Modal multi-langkah (Detail Acara -> Pilih Sub Sektor) dengan logika dropdown "Venue Lainnya" yang dinamis.
+
+    4. Manajemen LMS: CRUD media pembelajaran dengan pilihan sumber (URL eksternal atau Upload File).
+
+    5. Manajemen Produk: CRUD etalase produk dengan upload foto.
+
+    6. Manajemen Venue: CRUD data venue (lokasi) dengan upload foto.
+
+    7. Manajemen Berita: CRUD untuk berita/artikel.
+
+- Manajemen Peserta: Melihat daftar semua peserta (role "user") dan detail profil mereka (termasuk No. HP dan mentor).
+
+**3. Portal Pengguna (User Dashboard)**
+
+- Alur Registrasi & Profiling: Pengguna baru mendaftar (halaman registrasi kustom) dan langsung diarahkan ke modal 2 langkah untuk melengkapi profil (bio, foto, portofolio) dan memilih minat (Sub Sektor & Kebutuhan Layanan).
+
+- Dashboard Dinamis: Tampilan dashboard yang dipersonalisasi:
+
+- Menampilkan carousel Produk Etalase dan daftar Berita Terbaru.
+
+- Menampilkan grid card Event Mendatang dan Media Pembelajaran (LMS) yang difilter berdasarkan sub-sektor yang diminati pengguna.
+
+- Sistem Rekomendasi Mentor:
+
+    1. Menampilkan daftar mentor yang relevan berdasarkan sub-sektor pengguna.
+
+    2. Pengguna dapat Memilih Mentor (dengan konfirmasi SweetAlert).
+
+    3. Jika sudah punya mentor, menampilkan detail mentor saat ini dan tombol Ganti Mentor (dengan konfirmasi SweetAlert).
+
+- Halaman Eksplorasi (User-Facing):
+
+- Halaman user.products.index, user.venues.index, user.events.index, user.lms.index, user.news.index dengan tampilan grid card yang rapi.
+
+- Halaman user.lms.index dan user.events.index memiliki filter chips (badges) untuk memfilter konten berdasarkan Tipe (LMS) atau Status (Event).
+
+- Detail Produk dan Venue ditampilkan dalam Modal AJAX untuk experience yang cepat.
+
+- Halaman Profil: Tampilan detail profil pengguna dengan modal edit 3-tab (Akun, Profil, Minat) untuk memperbarui data via AJAX.
+
+## 🛠️ Teknologi yang Digunakan
+
+-   Database: MySQL
+
+-   Template Admin/Dashboard: AdminLTE v3 (diimplementasikan melalui paket jeroennoten/laravel-adminlte)
+
+-   Frontend (Dashboard): Bootstrap 4 (dari AdminLTE), jQuery, AJAX (untuk semua operasi CRUD modal)
+
+-   Frontend (Landing Page): Tailwind CSS (via CDN)
+
+-   Library Tambahan:
+
+    1. SweetAlert2: (Versi 8, via CDN) untuk notifikasi modal yang interaktif.
+
+    2. Chart.js: (Opsional, untuk dashboard admin)
+
+    3. Font Awesome 5/6: (via AdminLTE) untuk ikonografi.
+
+    4. Autentikasi: Laravel UI (Bootstrap) dengan view yang dikustomisasi agar sesuai layout AdminLTE.
+
+    5. Otorisasi: Laravel Gates (is_admin, is_user) untuk memisahkan logika peran di backend dan sidebar.
