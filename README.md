@@ -50,8 +50,6 @@ Tombol Login dan Register yang jelas.
 
 -   CRUD AJAX: Sebagian besar manajemen data menggunakan modal AJAX (tanpa reload halaman) untuk:
 
-    > > > > > > > 5a420e4470a7bce396ed9bf3c4bfc0d2cdf2458f
-
         1. Manajemen Admin: Tambah/Edit/Hapus admin (dengan toggle lihat password).
 
         2. Manajemen Mentor: CRUD data mentor, keahlian (sub sektor), dan layanan (user needs).
@@ -118,7 +116,6 @@ Tombol Login dan Register yang jelas.
 -   Detail Produk dan Venue ditampilkan dalam Modal AJAX untuk experience yang cepat.
 
 -   Halaman Profil: Tampilan detail profil pengguna dengan modal edit 3-tab (Akun, Profil, Minat) untuk memperbarui data via AJAX.
-    > > > > > > > 5a420e4470a7bce396ed9bf3c4bfc0d2cdf2458f
 
 ## 🛠️ Teknologi yang Digunakan
 

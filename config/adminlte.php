@@ -321,6 +321,13 @@ return [
             'icon' => 'fas fa-fw fa-user',
             'can' => 'isUser', // Hanya tampil jika Gate 'is_user' true
         ],
+        [
+            'text' => 'Kolaborasi',
+            'route' => 'collaboration.index',
+            'icon' => 'fas fa-fw fa-users',
+            'can' => 'isUser',
+        ],
+
 
         // --- Item Khusus Admin ---
         ['header' => 'DATA MASTER', 'can' => 'isAdmin'], // Hanya tampil jika Gate 'is_admin' true
@@ -428,6 +435,7 @@ return [
             'icon' => 'fas fa-fw fa-newspaper',
             'can' => 'isUser',
         ],
+
 
         // --- Tautan Eksternal (Selalu Tampil) ---
         [

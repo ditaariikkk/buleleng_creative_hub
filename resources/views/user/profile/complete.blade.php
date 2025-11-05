@@ -40,17 +40,40 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="portfolio_url">Link Portofolio (jika ada)</label>
-                                <input type="url" class="form-control @error('portfolio_url') is-invalid @enderror" id="portfolio_url" name="portfolio_url" value="{{ old('portfolio_url', $profile->portfolio_url ?? '') }}" placeholder="https://behance.net/namaanda">
-                                @error('portfolio_url') <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span> @enderror
+                                <label for="portofolio_url">Link Portofolio (jika ada)</label>
+                                {{-- PERBAIKAN: Gunakan 'portofolio_url' (f) --}}
+                                <input type="url" class="form-control @error('portofolio_url') is-invalid @enderror" id="portofolio_url" name="portofolio_url" value="{{ old('portofolio_url', $profile->portofolio_url ?? '') }}" placeholder="https://behance.net/namaanda">
+                                @error('portofolio_url') <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span> @enderror
                             </div>
 
                             <div class="form-group">
-                                {{-- Pastikan nama input 'user_photo' sesuai dengan controller --}}
+                                {{-- PERBAIKAN: Ganti nama 'photo_path' ke 'user_photo' agar konsisten --}}
                                 <label for="user_photo">Unggah Foto Profil (Opsional)</label>
                                 <input type="file" class="form-control-file @error('user_photo') is-invalid @enderror" id="user_photo" name="user_photo" accept="image/*">
                                 @error('user_photo') <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span> @enderror
                             </div>
+
+                            {{-- ===== TAMBAHAN KATEGORI PENGGUNA ===== --}}
+                            <hr>
+                            <div class="form-group">
+                                <label for="category">Kategori Anda <span class="text-danger">*</span></label>
+                                <select class="form-control @error('category') is-invalid @enderror" id="category" name="category" required>
+                                    <option value="" disabled {{ old('category', $profile->category ?? '') == '' ? 'selected' : '' }}>-- Pilih Kategori --</option>
+                                    <option value="Mahasiswa/Umum" {{ old('category', $profile->category ?? '') == 'Mahasiswa/Umum' ? 'selected' : '' }}>Mahasiswa / Umum</option>
+                                    {{-- Pastikan value "Pelaku Usaha Ekonomi Kreatif" sesuai dengan Enum DB --}}
+                                    <option value="Pelaku Usaha Ekonomi Kreatif" {{ old('category', $profile->category ?? '') == 'Pelaku Usaha Ekonomi Kreatif' ? 'selected' : '' }}>Pelaku Usaha Ekonomi Kreatif</option>
+                                </select>
+                                @error('category') <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span> @enderror
+                            </div>
+                            
+                            {{-- Field Nama Usaha (Dinamis) --}}
+                            <div class="form-group" id="businessNameField" style="display: none;">
+                                <label for="business_name">Nama Usaha <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control @error('business_name') is-invalid @enderror" id="business_name" name="business_name" value="{{ old('business_name', $profile->business_name ?? '') }}">
+                                @error('business_name') <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span> @enderror
+                            </div>
+                            {{-- ===== AKHIR TAMBAHAN ===== --}}
+
                         </div>
 
                         {{-- Langkah 2: Minat & Kebutuhan --}}
@@ -63,18 +86,14 @@
                                     @foreach ($subSectors as $sub)
                                         <div class="col-md-6">
                                             <div class="form-check">
-                                                {{-- Gunakan name="sub_sectors[]" --}}
                                                 <input class="form-check-input sub-sector-check" type="checkbox" name="sub_sectors[]" value="{{ $sub->sub_sector_id }}" id="sub_{{ $sub->sub_sector_id }}"
-                                                    {{-- Perbaiki old() check untuk array --}}
                                                     {{ in_array($sub->sub_sector_id, old('sub_sectors', $profile->creativeSubSectors->pluck('sub_sector_id')->toArray() ?? [])) ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="sub_{{ $sub->sub_sector_id }}">{{ $sub->name }}</label>
                                             </div>
                                         </div>
                                     @endforeach
                                 </div>
-                                 {{-- Tampilkan error validasi Laravel --}}
                                  @error('sub_sectors') <span class="text-danger small"><strong>Pilih minimal satu sub sektor.</strong></span> @enderror
-                                 {{-- Placeholder untuk error JS --}}
                                  <div id="sub_sector_error" class="text-danger small" style="display: none;">Pilih minimal satu sub sektor.</div>
                             </div>
 
@@ -84,18 +103,14 @@
                                     @foreach ($needs as $need)
                                         <div class="col-md-6">
                                             <div class="form-check">
-                                                 {{-- Gunakan name="user_needs[]" --}}
                                                 <input class="form-check-input user-need-check" type="checkbox" name="user_needs[]" value="{{ $need->need_id }}" id="need_{{ $need->need_id }}"
-                                                     {{-- Perbaiki old() check untuk array, asumsi PK UserNeed 'need_id'--}}
                                                      {{ in_array($need->need_id, old('user_needs', $profile->userNeeds->pluck('need_id')->toArray() ?? [])) ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="need_{{ $need->need_id }}">{{ $need->need_name }}</label>
                                             </div>
                                         </div>
                                     @endforeach
                                 </div>
-                                {{-- Tampilkan error validasi Laravel --}}
                                 @error('user_needs') <span class="text-danger small"><strong>Pilih minimal satu kebutuhan.</strong></span> @enderror
-                                 {{-- Placeholder untuk error JS --}}
                                 <div id="user_need_error" class="text-danger small" style="display: none;">Pilih minimal satu kebutuhan.</div>
                             </div>
                         </div>
@@ -124,26 +139,46 @@
 @stop
 
 @section('js')
-{{-- Pastikan SweetAlert ter-load, bisa dari AdminLTE config atau manual include --}}
-{{-- Contoh jika perlu manual: <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}} 
 <script>
     $(document).ready(function() {
         $('#profileModal').modal({ backdrop: 'static', keyboard: false, show: true });
 
-        // Tampilkan SweetAlert jika ada error dari session controller
         @if(session('profile_update_error'))
             Swal.fire({
                 title: 'Error!',
                 text: "{{ session('profile_update_error') }}",
-                type: 'error', // type untuk SweetAlert v8 (sesuaikan jika versi Anda berbeda)
-                // icon: 'error' // icon untuk SweetAlert v9+
+                type: 'error', 
             });
         @endif
         
-        // Tentukan step awal berdasarkan adanya error validasi Laravel
+        // --- Logika untuk field Nama Usaha ---
+        function toggleBusinessName(categoryValue) {
+            if (categoryValue === 'Pelaku Usaha Ekonomi Kreatif') {
+                $('#businessNameField').slideDown();
+                $('#business_name').prop('required', true);
+            } else {
+                $('#businessNameField').slideUp();
+                $('#business_name').prop('required', false);
+            }
+        }
+        
+        // Cek saat halaman dimuat (jika ada old value atau data)
+        toggleBusinessName($('#category').val()); 
+        
+        // Cek saat dropdown Kategori diubah
+        $('#category').on('change', function() {
+            toggleBusinessName(this.value);
+        });
+        // --- Akhir Logika Nama Usaha ---
+        
         let initialStep = 1;
-        @if ($errors->has('sub_sectors') || $errors->has('user_needs'))
-            initialStep = 2;
+        // Tentukan step awal berdasarkan error validasi
+        @if ($errors->any())
+            @if ($errors->has('sub_sectors') || $errors->has('user_needs'))
+                initialStep = 2; // Error ada di step 2
+            @else
+                initialStep = 1; // Error ada di step 1 (default)
+            @endif
         @endif
         
         let currentStep = initialStep; 
@@ -158,33 +193,29 @@
              $('#profileModalLabel').text('Profil Pengguna - ' + (step === 1 ? 'Informasi Dasar' : 'Minat & Kebutuhan')); 
         }
 
-        // Tampilkan step awal
          goToStep(currentStep);
 
         $('#btn-next-step').on('click', function() {
             let isValid = true;
-            // Hanya cek field required di step 1
-            if (!$('#phone_number').val()) { 
-                $('#phone_number').addClass('is-invalid');
-                isValid = false;
-            } else {
-                 $('#phone_number').removeClass('is-invalid');
-            }
+            // Validasi semua field required di Step 1 yang terlihat
+            $('#step1 input[required], #step1 select[required], #step1 textarea[required]').each(function() {
+                 $(this).removeClass('is-invalid'); // Hapus error lama
+                if ($(this).is(':visible') && !$(this).val()) { // Cek jika terlihat & kosong
+                    $(this).addClass('is-invalid'); 
+                    isValid = false;
+                }
+            });
            
             if (!isValid) {
-                 // Ganti alert dengan pesan yang lebih spesifik jika perlu
-                 alert('Harap isi Nomor HP.'); 
+                 alert('Harap isi semua field yang wajib (bertanda *).'); 
                  return; 
             }
             goToStep(2);
         });
 
-        $('#btn-prev-step').on('click', function() {
-            goToStep(1);
-        });
+        $('#btn-prev-step').on('click', function() { goToStep(1); });
 
-        // Validasi Checkbox Step 2 sebelum submit form
-        $('form').on('submit', function(e) { // Lebih baik menargetkan form langsung
+        $('form').on('submit', function(e) { 
              let subSectorChecked = $('input.sub-sector-check:checked').length > 0;
              let userNeedChecked = $('input.user-need-check:checked').length > 0;
              
@@ -192,21 +223,20 @@
              $('#user_need_error').toggle(!userNeedChecked);
 
              if (currentStep === 2 && (!subSectorChecked || !userNeedChecked)) {
-                 e.preventDefault(); // Hentikan submit HANYA jika di step 2 dan validasi gagal
-                 // Ganti alert dengan Swal jika preferensi
+                 e.preventDefault(); 
                  alert('Harap pilih minimal satu Sub Sektor dan satu Kebutuhan.');
              }
-             // Jika valid atau di step 1, form akan tersubmit
         });
 
-         // Hapus pesan error JS saat checkbox dipilih
          $('input.sub-sector-check').on('change', function() { if ($('input.sub-sector-check:checked').length > 0) $('#sub_sector_error').hide(); });
          $('input.user-need-check').on('change', function() { if ($('input.user-need-check:checked').length > 0) $('#user_need_error').hide(); });
 
-         // Hapus kelas is-invalid saat input required di step 1 diisi
-         $('#phone_number').on('input', function() { if ($(this).val()) $(this).removeClass('is-invalid'); });
-
+         // Hapus error saat diisi
+         $('#phone_number, #category, #business_name').on('input change', function() { 
+             if ($(this).val()) {
+                 $(this).removeClass('is-invalid');
+             }
+         });
     });
 </script>
 @stop
-

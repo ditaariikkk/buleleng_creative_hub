@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\VenueController;
 use App\Http\Controllers\Admin\LmsController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\CollaborationController;
 
 
 /*
@@ -139,5 +140,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/venues/{venue}', [UserPageController::class, 'venueShow'])->name('venues.show');
     });
 
+    Route::prefix('collaboration')->name('collaboration.')->group(function () {
+
+        Route::get('/', [CollaborationController::class, 'index'])->name('index');
+        Route::post('/', [CollaborationController::class, 'store'])->name('store');
+        Route::get('/user/{user}', [CollaborationController::class, 'showUser'])->name('user.show');
+        Route::patch('/{collaboration:collaboration_id}/accept', [CollaborationController::class, 'accept'])->name('accept');
+        Route::patch('/{collaboration:collaboration_id}/reject', [CollaborationController::class, 'reject'])->name('reject');
+    });
 });
 

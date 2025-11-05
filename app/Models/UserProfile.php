@@ -24,6 +24,8 @@ class UserProfile extends Model
         'phone_number',
         'portfolio_url',
         'user_photo',
+        'category',
+        'business_name',
     ];
 
 
@@ -55,4 +57,5 @@ class UserProfile extends Model
             'need_id'             // Primary key terkait (UserNeed)
         );
     }
+
 }

@@ -48,7 +48,9 @@ class UserProfileController extends Controller
             'bio' => 'nullable|string|max:1000',
             'phone_number' => ['required', 'string', 'max:20'], // Buat required
             'portofolio_url' => 'nullable|url|max:255',
-            'user_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Ganti nama field jika perlu
+            'user_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'category' => 'required|in:Mahasiswa/Umum,Pelaku Usaha Ekonomi Kreatif',
+            'business_name' => 'nullable|string|max:255',
             'sub_sectors' => 'required|array|min:1',
             // Asumsi PK CreativeSubSector adalah 'sub_sector_id'
             'sub_sectors.*' => 'exists:creative_sub_sectors,sub_sector_id',
