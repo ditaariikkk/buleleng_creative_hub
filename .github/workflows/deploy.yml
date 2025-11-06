@@ -47,7 +47,7 @@ jobs:
     # 7. Deploy menggunakan LFTP (Action dari haukurh)
     - name: ⬆️ Deploy files via LFTP (Action dari haukurh)
       # --- Menggunakan action yang Anda temukan ---
-      uses: haukurh/lftp-action@v2
+      uses: haukurh/lftp-action@v1
       with:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
