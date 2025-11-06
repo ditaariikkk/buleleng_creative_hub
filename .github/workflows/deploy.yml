@@ -22,7 +22,7 @@ jobs:
         extensions: mbstring, dom, curl, json, pdo, pdo_mysql
         tools: composer
       env:
-        COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        COMPOSCOM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     # 3. Instal semua dependency (BUAT FOLDER VENDOR)
     - name: 📦 Install Composer Dependencies
@@ -46,18 +46,23 @@ jobs:
         
     # 7. Deploy menggunakan LFTP (Action yang Cepat dan Terpercaya)
     - name: ⬆️ Deploy files via LFTP
-      uses: appleboy/lftp-action@master
+      # --- INI ADALAH ACTION YANG BENAR ---
+      uses: Git-Actions/lftp-action@v1.1.2
       with:
         host: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
+        user: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        port: 21 # Port FTP standar
-        local_root: "." # Sumber dari runner (semua file)
-        remote_root: "/public_html/" # Tujuan di Hostinger
-        script: |
-          set ftp:ssl-allow no;
-          mirror --delete --reverse --verbose --parallel=5 \
-          --exclude-glob .git* \
-          --exclude .github/ \
-          --exclude vendor/laravel/sail/ \
-          --exclude node_modules/
+        remote_root: /public_html/
+        local_root: "."
+        # Opsi LFTP:
+        # mirror: Sinkronisasi
+        # --delete: Hapus file di server yg tidak ada di repo
+        # --reverse: Upload (dari lokal ke remote)
+        # --verbose: Tampilkan log
+        # --parallel=5: Upload 5 file sekaligus (JAUH LEBIH CEPAT)
+        # --exclude: Folder yg tidak perlu di-upload
+        options: >
+          mirror --delete --reverse --verbose --parallel=5
+          --exclude .git* --exclude .github/ 
+          --exclude node_modules/ 
+          --exclude vendor/laravel/sail/
