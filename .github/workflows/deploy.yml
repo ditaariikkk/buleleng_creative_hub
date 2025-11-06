@@ -52,7 +52,8 @@ jobs:
 
     # 8. Deploy menggunakan LFTP (Metode Baru yang Lebih Tangguh)
     - name: ⬆️ Deploy files via LFTP
-      uses: web-server-deploy/lftp-deploy@v1.4
+      # --- PERBAIKAN: Nama action yang benar adalah lftp-action ---
+      uses: web-server-deploy/lftp-action@v1.4
       with:
         server: ftp://${{ secrets.FTP_SERVER }}
         user: ${{ secrets.FTP_USERNAME }}
