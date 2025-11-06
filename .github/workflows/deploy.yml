@@ -44,13 +44,19 @@ jobs:
         php artisan view:cache
 
     # 7. Kirim file ke Hostinger menggunakan FTP
-    - name: ⬆️ Deploy files via FTP
+   - name: ⬆️ Deploy files via FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /public_html/  # Direktori tujuan di Hostinger
+        server-dir: /public_html/  # Pastikan path ini benar
+        
+        # --- TAMBAHKAN DUA BARIS DI BAWAH INI ---
+        dangerous-clean-slate: true
+        ftp-simple-client: true
+        # ----------------------------------------
+        
         exclude: |
           **/.git*
           **/.git*/**
