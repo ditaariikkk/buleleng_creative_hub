@@ -1,4 +1,4 @@
-name: 🚀 Deploy Laravel to Hostinger
+name: 🚀 Deploy Laravel to Hostinger (via LFTP)
 
 on:
   push:
@@ -42,24 +42,39 @@ jobs:
         php artisan config:cache
         php artisan route:cache
         php artisan view:cache
+        
+    # 7. Hapus file yang tidak perlu di-upload
+    - name: 🧹 Clean up files
+      run: |
+        rm -rf .git
+        rm -rf .github
+        rm -f .gitignore
 
-    # 7. Kirim file ke Hostinger menggunakan FTP
-    - name: ⬆️ Deploy files via FTP
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+    # 8. Deploy menggunakan LFTP (Metode Baru yang Lebih Tangguh)
+    - name: ⬆️ Deploy files via LFTP
+      uses: web-server-deploy/lftp-deploy@v1.4
       with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
+        server: ftp://${{ secrets.FTP_SERVER }}
+        user: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /public_html/  # Pastikan path ini benar
         
-        # --- Perbaikan untuk koneksi Hostinger ---
-        dangerous-clean-slate: true
-        ftp-simple-client: true
-        # ----------------------------------------
-        
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/node_modules/**
-          **/.github/**
-          .gitignore
+        # Opsi LFTP:
+        # --delete: Menghapus file di server yg tidak ada di repo
+        # --mirror: Sinkronisasi (hanya upload yg berubah)
+        # --parallel=5: Upload 5 file sekaligus (lebih cepat)
+        # --verbose: Tampilkan log lengkap
+        # --exclude: File/folder yg tidak perlu di-upload
+        lftp-options: >
+          -e "set ftp:ssl-allow no;
+          set cmd:fail-exit yes;
+          set net:timeout 10;
+          set net:max-retries 2;
+          set net:reconnect-interval-base 5;
+          mirror --delete --parallel=5 --verbose
+          --exclude .git/ --exclude .github/ --exclude .gitignore
+          ."
+          
+        # 'local-dir' adalah sumber (semua file di runner)
+        # 'server-dir' adalah tujuan di Hostinger
+        local-dir: "."
+        server-dir: "/public_html/"
