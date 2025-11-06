@@ -1,4 +1,4 @@
-name: 🚀 Deploy Laravel to Hostinger (Metode Stabil)
+name: 🚀 Deploy Laravel to Hostinger (Metode LFTP Cepat)
 
 on:
   push:
@@ -26,6 +26,7 @@ jobs:
 
     # 3. Instal semua dependency (BUAT FOLDER VENDOR)
     - name: 📦 Install Composer Dependencies
+      # --no-dev: Hanya install package produksi (vendor lebih kecil)
       run: composer install --no-dev --no-interaction --optimize-autoloader
 
     # 4. Buat file .env dari GitHub Secret
@@ -43,22 +44,20 @@ jobs:
         php artisan route:cache
         php artisan view:cache
         
-    # 7. Deploy menggunakan FTP (Kembali ke metode awal DENGAN PERBAIKAN)
-    - name: ⬆️ Deploy files via FTP
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+    # 7. Deploy menggunakan LFTP (Action yang Cepat dan Terpercaya)
+    - name: ⬆️ Deploy files via LFTP
+      uses: appleboy/lftp-action@master
       with:
-        server: ${{ secrets.FTP_SERVER }}
+        host: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /public_html/
-        
-        # --- Perbaikan untuk koneksi Hostinger ---
-        dangerous-clean-slate: true
-        ftp-legacy: true # <-- Ini adalah parameter yang BENAR
-        
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/node_modules/**
-          **/.github/**
-          .gitignore
+        port: 21 # Port FTP standar
+        local_root: "." # Sumber dari runner (semua file)
+        remote_root: "/public_html/" # Tujuan di Hostinger
+        script: |
+          set ftp:ssl-allow no;
+          mirror --delete --reverse --verbose --parallel=5 \
+          --exclude-glob .git* \
+          --exclude .github/ \
+          --exclude vendor/laravel/sail/ \
+          --exclude node_modules/
