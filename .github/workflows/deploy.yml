@@ -18,7 +18,7 @@ jobs:
     - name: ⚙️ Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.3' # GANTI DENGAN VERSI PHP ANDA (sesuaikan dengan Hostinger)
+        php-version: '8.3' # Sesuaikan dengan versi PHP di Hostinger
         extensions: mbstring, dom, curl, json, pdo, pdo_mysql
         tools: composer
       env:
@@ -36,7 +36,7 @@ jobs:
     - name: 🔑 Generate Laravel App Key
       run: php artisan key:generate
 
-    # 6. Optimasi Laravel untuk produksi (Optional tapi disarankan)
+    # 6. Optimasi Laravel untuk produksi
     - name: ⚡ Optimize Laravel
       run: |
         php artisan config:cache
@@ -44,7 +44,7 @@ jobs:
         php artisan view:cache
 
     # 7. Kirim file ke Hostinger menggunakan FTP
-   - name: ⬆️ Deploy files via FTP
+    - name: ⬆️ Deploy files via FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ${{ secrets.FTP_SERVER }}
@@ -52,7 +52,7 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         server-dir: /public_html/  # Pastikan path ini benar
         
-        # --- TAMBAHKAN DUA BARIS DI BAWAH INI ---
+        # --- Perbaikan untuk koneksi Hostinger ---
         dangerous-clean-slate: true
         ftp-simple-client: true
         # ----------------------------------------
