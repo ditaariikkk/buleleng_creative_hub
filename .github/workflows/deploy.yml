@@ -1,0 +1,59 @@
+name: 🚀 Deploy Laravel to Hostinger
+
+on:
+  push:
+    branches:
+      - main  # Ganti 'main' jika branch utama Anda 'master'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      
+    # 1. Mengambil kode dari repository
+    - name: ⬇️ Check out repository
+      uses: actions/checkout@v4
+
+    # 2. Setup PHP
+    - name: ⚙️ Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2' # GANTI DENGAN VERSI PHP ANDA (sesuaikan dengan Hostinger)
+        extensions: mbstring, dom, curl, json, pdo, pdo_mysql
+        tools: composer
+      env:
+        COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # 3. Instal semua dependency (BUAT FOLDER VENDOR)
+    - name: 📦 Install Composer Dependencies
+      run: composer install --no-dev --no-interaction --optimize-autoloader
+
+    # 4. Buat file .env dari GitHub Secret
+    - name: 📝 Create .env file
+      run: echo "${{ secrets.ENV_FILE }}" > .env
+      
+    # 5. Buat Kunci Aplikasi Laravel
+    - name: 🔑 Generate Laravel App Key
+      run: php artisan key:generate
+
+    # 6. Optimasi Laravel untuk produksi (Optional tapi disarankan)
+    - name: ⚡ Optimize Laravel
+      run: |
+        php artisan config:cache
+        php artisan route:cache
+        php artisan view:cache
+
+    # 7. Kirim file ke Hostinger menggunakan FTP
+    - name: ⬆️ Deploy files via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: /public_html/  # Direktori tujuan di Hostinger
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          **/.github/**
+          .gitignore
