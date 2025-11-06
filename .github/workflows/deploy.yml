@@ -22,11 +22,10 @@ jobs:
         extensions: mbstring, dom, curl, json, pdo, pdo_mysql
         tools: composer
       env:
-        COMPOSCOM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     # 3. Instal semua dependency (BUAT FOLDER VENDOR)
     - name: 📦 Install Composer Dependencies
-      # --no-dev: Hanya install package produksi (vendor lebih kecil)
       run: composer install --no-dev --no-interaction --optimize-autoloader
 
     # 4. Buat file .env dari GitHub Secret
@@ -35,8 +34,8 @@ jobs:
       
     # 5. Buat Kunci Aplikasi Laravel
     - name: 🔑 Generate Laravel App Key
-      run: php artisan key:generate
-
+      run: php artisan key:generate --force
+      
     # 6. Optimasi Laravel untuk produksi
     - name: ⚡ Optimize Laravel
       run: |
@@ -46,24 +45,16 @@ jobs:
         
     # 7. Deploy menggunakan LFTP (Action dari haukurh)
     - name: ⬆️ Deploy files via LFTP (Action dari haukurh)
-      # --- Menggunakan action yang Anda temukan ---
+      # --- Menggunakan action yang Anda temukan, @v1 ---
       uses: haukurh/lftp-action@v1
       with:
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        server: ${{ secrets.FTP_SERVER }}
-        #Perintah LFTP:
-        #set ftp:ssl-allow no; -> (Keamanan) Izinkan koneksi non-SSL
-        # set net:max-retries 3; -> Coba lagi 3x jika gagal
-        # mirror --delete --reverse --verbose --parallel=5 -> Perintah inti
-        #   --delete: Hapus file lama di server
-        #   --reverse: Upload (lokal ke remote)
-        #   --verbose: Tampilkan log
-        #   --parallel=5: Upload 5 file sekaligus (KUNCI KECEPATAN)
-        #   --exclude: File/folder yang diabaikan
-        #   ".": Sumber (lokal)
-        #   "/public_html/": Tujuan (remote)
-        args: |
+        # --- MENGGUNAKAN NAMA PARAMETER YANG BENAR UNTUK v1 ---
+        host: ${{ secrets.FTP_SERVER }}
+        user: ${{ secrets.FTP_USERNAME }}
+        pass: ${{ secrets.FTP_PASSWORD }}
+        
+        # --- 'args' diubah menjadi 'script' ---
+        script: |
           set ftp:ssl-allow no;
           set net:max-retries 3;
           mirror --delete --reverse --verbose --parallel=5 \
