@@ -1,4 +1,4 @@
-name: 🚀 Deploy Laravel ke Hostinger via LFTP (Fix Version)
+name: 🚀 Deploy Laravel ke Hostinger via LFTP (FTP Mode)
 
 on:
   push:
@@ -10,9 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Ambil kode dari repository
       - name: 🧱 Checkout repository
         uses: actions/checkout@v4
 
+      # 2. Setup PHP environment
       - name: ⚙️ Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -22,32 +24,36 @@ jobs:
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # 3. Install dependency Laravel (tanpa dev)
       - name: 📦 Install Composer Dependencies
         run: composer install --no-dev --no-interaction --optimize-autoloader
 
+      # 4. Generate file .env dari Secret GitHub
       - name: 📝 Create .env file
         run: echo "${{ secrets.ENV_FILE }}" > .env
 
+      # 5. Generate App Key Laravel
       - name: 🔑 Generate Laravel App Key
         run: php artisan key:generate
 
+      # 6. Optimasi Laravel untuk Produksi
       - name: ⚡ Optimize Laravel
         run: |
           php artisan config:cache
           php artisan route:cache
           php artisan view:cache
 
-      # Gunakan LFTP langsung agar tidak salah parsing command
-      - name: ⬆️ Deploy to Hostinger using LFTP (Direct)
+      # 7. Deploy ke Hostinger menggunakan FTP (LFTP)
+      - name: ⬆️ Deploy to Hostinger using LFTP (FTP Mode)
         run: |
           sudo apt-get update -y
           sudo apt-get install -y lftp
           lftp -e "
-            set sftp:auto-confirm yes;
+            set ftp:ssl-allow no;
             set net:max-retries 3;
             set net:timeout 30;
-            set ftp:ssl-allow no;
             set xfer:clobber yes;
+            open -u '${{ secrets.FTP_USERNAME }}','${{ secrets.FTP_PASSWORD }}' ftp://153.92.10.91;
             mirror --reverse --delete --verbose --parallel=3 \
               --exclude-glob .git* \
               --exclude-glob .github/ \
@@ -55,4 +61,4 @@ jobs:
               --exclude-glob vendor/laravel/sail/ \
               ./ /public_html/;
             bye
-          " -u \"${{ secrets.FTP_USERNAME }}\",\"${{ secrets.FTP_PASSWORD }}\" sftp://${{ secrets.FTP_SERVER }}
+          "
