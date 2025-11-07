@@ -1,4 +1,4 @@
-name: 🚀 Deploy Laravel to Hostinger (Metode LFTP Cepat)
+name: 🚀 Deploy Laravel to Hostinger (LFTP Stabil)
 
 on:
   push:
@@ -43,14 +43,14 @@ jobs:
           ftp_host: ${{ secrets.FTP_SERVER }}
           ftp_user: ${{ secrets.FTP_USERNAME }}
           ftp_pass: ${{ secrets.FTP_PASSWORD }}
-          commands: |
-            set sftp:auto-confirm yes
-            set net:max-retries 3
-            set ftp:ssl-allow no
-            mirror -R --delete --verbose --parallel=5 \
-              --exclude-glob .git* \
-              --exclude-glob .github/ \
-              --exclude-glob node_modules/ \
-              --exclude-glob vendor/laravel/sail/ \
-              ./ domains/bulelengcreativehub.id/public_html/
-            bye
+          commands: >
+            set sftp:auto-confirm yes;
+            set net:max-retries 3;
+            set ftp:ssl-allow no;
+            mirror -R --delete --verbose --parallel=5
+            --exclude-glob .git* 
+            --exclude-glob .github/
+            --exclude-glob node_modules/
+            --exclude-glob vendor/laravel/sail/
+            ./ domains/bulelengcreativehub.id/public_html/;
+            bye;
