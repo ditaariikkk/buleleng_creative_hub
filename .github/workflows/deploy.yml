@@ -45,16 +45,15 @@ jobs:
         
     # 7. Deploy menggunakan LFTP (Action dari haukurh)
     - name: ⬆️ Deploy files via LFTP (Action dari haukurh)
-      # --- Menggunakan action yang Anda temukan, @v1 ---
       uses: haukurh/lftp-action@v1
       with:
-        # --- MENGGUNAKAN NAMA PARAMETER YANG BENAR UNTUK v1 ---
-        host: ${{ secrets.FTP_SERVER }}
-        user: ${{ secrets.FTP_USERNAME }}
-        pass: ${{ secrets.FTP_PASSWORD }}
+        # --- MENGGUNAKAN NAMA PARAMETER YANG BENAR (DARI LOG ANDA) ---
+        ftp_host: ${{ secrets.FTP_SERVER }}
+        ftp_user: ${{ secrets.FTP_USERNAME }}
+        ftp_pass: ${{ secrets.FTP_PASSWORD }}
         
-        # --- 'args' diubah menjadi 'script' ---
-        script: |
+        # --- 'script' diubah menjadi 'commands' ---
+        commands: |
           set ftp:ssl-allow no;
           set net:max-retries 3;
           mirror --delete --reverse --verbose --parallel=5 \
