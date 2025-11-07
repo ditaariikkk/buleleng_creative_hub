@@ -1,56 +1,48 @@
-name: 🚀 Deploy Laravel ke Hostinger (LFTP - SFTP Mode)
+name: 🚀 Deploy Laravel ke Hostinger via LFTP (Fix Version)
 
 on:
   push:
     branches:
-      - main  # Jalankan otomatis setiap push ke branch 'main'
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Ambil kode dari repository
       - name: 🧱 Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Setup PHP environment
       - name: ⚙️ Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3' # Sesuaikan dengan versi di Hostinger
+          php-version: '8.3'
           extensions: mbstring, dom, curl, json, pdo, pdo_mysql
           tools: composer
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 3. Install dependency Laravel (tanpa dev)
       - name: 📦 Install Composer Dependencies
         run: composer install --no-dev --no-interaction --optimize-autoloader
 
-      # 4. Generate file .env dari Secret GitHub
       - name: 📝 Create .env file
         run: echo "${{ secrets.ENV_FILE }}" > .env
 
-      # 5. Generate App Key Laravel
       - name: 🔑 Generate Laravel App Key
         run: php artisan key:generate
 
-      # 6. Optimasi Laravel untuk Produksi
       - name: ⚡ Optimize Laravel
         run: |
           php artisan config:cache
           php artisan route:cache
           php artisan view:cache
 
-      # 7. Deploy via LFTP (SFTP Mode)
-      - name: ⬆️ Deploy files via LFTP (SFTP Mode)
-        uses: haukurh/lftp-action@v1
-        with:
-          ftp_host: sftp://${{ secrets.FTP_SERVER }}
-          ftp_user: ${{ secrets.FTP_USERNAME }}
-          ftp_pass: ${{ secrets.FTP_PASSWORD }}
-          commands: |
+      # Gunakan LFTP langsung agar tidak salah parsing command
+      - name: ⬆️ Deploy to Hostinger using LFTP (Direct)
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y lftp
+          lftp -e "
             set sftp:auto-confirm yes;
             set net:max-retries 3;
             set net:timeout 30;
@@ -62,4 +54,5 @@ jobs:
               --exclude-glob node_modules/ \
               --exclude-glob vendor/laravel/sail/ \
               ./ /public_html/;
-            bye;
+            bye
+          " -u \"${{ secrets.FTP_USERNAME }}\",\"${{ secrets.FTP_PASSWORD }}\" sftp://${{ secrets.FTP_SERVER }}
