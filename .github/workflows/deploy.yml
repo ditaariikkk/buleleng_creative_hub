@@ -56,11 +56,6 @@ jobs:
         commands: |
           set ftp:ssl-allow no;
           set net:max-retries 3;
-          mirror --delete --reverse --verbose --parallel=5 \
-          --exclude .git* \
-          --exclude .github/ \
-          --exclude node_modules/ \
-          --exclude vendor/laravel/sail/ \
-          "." "/public_html/"
+          mirror --delete --reverse --verbose --parallel=5 --exclude .git* --exclude .github/ --exclude node_modules/ --exclude vendor/laravel/sail/ "." "/public_html/"
 
 
